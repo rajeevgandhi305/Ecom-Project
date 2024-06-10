@@ -5,7 +5,6 @@ function Update() {
   const [updateSuccess, setUpdateSuccess] = useState(false);    
   const [formData, setFormData] = useState({
     id: '', // Default user ID, update as needed
-    username: '',
     age: '',
     email: '',
     password: ''
@@ -19,60 +18,76 @@ function Update() {
   };
 
   const updateUser = () => {
-    axios.put(`http://localhost:4446/api/update/${formData.id}`, formData)
-      .then(response => {
-        setUpdateSuccess(true);
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.error('Error updating user:', error);
-      });
+    const token = localStorage.getItem('jwtToken'); // Retrieve the token from localStorage
+
+    axios.put(`http://192.168.0.138:4446/api/update/${formData.id}`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}` // Include the token in the request headers
+      }
+    })
+    .then(response => {
+      setUpdateSuccess(true);
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.error('Error updating user:', error);
+    });
   };
 
   return (
-    <div className=" max-w-md mx-8 my-8  ml-90  bg-red-500  border-blue-800 ">
-      <label className=" m-1 text-teal-700 ">
-        <span className="text-gray-700">User ID:</span>
-        <input
-          type="text"
-          name="id"
-          value={formData.id}
-          onChange={handleChange}
-           className="mt-1 block w-200 rounded-md border-blue-800"
-        />
-      </label>
-      <label className="block mt-4">
-        <span className="text-gray-700">Age:</span>
-        <input
-          type="text"
-          name="age"
-          value={formData.age}
-          onChange={handleChange}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-        />
-      </label>
-      <label className="block mt-4">
-        <span className="text-gray-700">Email:</span>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-        />
-      </label>
-      <label className="block mt-4">
-        <span className="text-gray-700">Password:</span>
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-        />
-      </label>
-      <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600" onClick={updateUser}>Update User</button>
-      {updateSuccess && <p className="mt-2 text-green-600">User updated successfully!</p>}
+    <div className='Register bg-no-repeat bg-cover min-h-screen' style={{ backgroundImage: 'url(./src/assets/images/bg1.jpg)' }}>
+    <div className="flex items-center justify-center min-h-screen px-4">
+      <div className="w-full max-w-md bg-slate-50 shadow-md rounded px-8 py-6">
+        <h2 className="text-4xl font-bold mb-6 text-center">Update</h2>
+        <label className=" mb-3">
+          <span className="block text-black text-sm font-bold mb-2">User ID:</span>
+          <input
+            type="text"
+            name="id"
+            value={formData.id}
+            onChange={handleChange}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+        </label>
+        <label className=" mb-3">
+        <span className="block text-black text-sm font-bold mb-2">Age:</span>
+          <input
+            type="text"
+            name="age"
+            value={formData.age}
+            onChange={handleChange}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+        </label>
+        <label className=" mb-3">
+        <span className="block text-black text-sm font-bold mb-2">Email:</span>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+        </label>
+        <label className=" mb-3">
+        <span className="block text-black text-sm font-bold mb-2">Password:</span>
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+        </label>
+        <button
+          className="mt-4 px-4 py-2 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+          onClick={updateUser}
+        >
+          Update User
+        </button>
+        {updateSuccess && <p className="mt-2 text-green-600 font-bold text-center">User updated successfully!</p>}
+      </div>
+    </div>
     </div>
   );
 }

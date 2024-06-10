@@ -56,6 +56,10 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer/Footer";
 import Update from "./components/Update/Update";
 import Registration from "./components/Register/Registration";
+import Logout from "./components/Logout/Logout";
+import Delete from "./components/Delete/Delete";
+import User from "./components/User/User";
+import UserList from "./components/UserList/UserList";
 
 const MainLayout = ({ children }) => (
   <>
@@ -80,10 +84,14 @@ const AuthLayout = ({ children }) => (
 const App = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<AuthLayout><Registration /></AuthLayout>} />
-      <Route path="/login" element={<AuthLayout><Login /></AuthLayout>} />
+    <Route path="/" element={<AuthLayout><Login /></AuthLayout>} />
+      <Route path="/register" element={<AuthLayout><Registration /></AuthLayout>} />
       <Route path="/update" element={<AuthLayout><Update /></AuthLayout>} />
+      <Route path="/user" element={<AuthLayout><User /></AuthLayout>} />
+      <Route path="/userlist" element={<AuthLayout><UserList /></AuthLayout>} />
+      <Route path="/delete" element={<AuthLayout><Delete /></AuthLayout>} />
       <Route path="/hero" element={<MainLayout><Hero /></MainLayout>} />
+      <Route path="/logout" element={<Logout />} />
       
     </Routes>
   </BrowserRouter>
