@@ -47,12 +47,12 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Login from "./components/Login/Login";
-import Hero from "./components/Hero";
-import Offers from "./components/Offers";
-import Plan from "./components/Plan";
-import Rooms from "./components/Rooms";
-import ImageSlider from "./components/ImageSlider";
-import Navbar from "./components/Navbar";
+import Hero from "./components/Hero/Hero";
+import Offers from "./components/Offer/Offers";
+import Plan from "./components/Plan/Plan";
+import Rooms from "./components/Rooms/Rooms";
+import ImageSlider from "./components/ImageSlider/ImageSlider";
+import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import Update from "./components/Update/Update";
 import Registration from "./components/Register/Registration";
